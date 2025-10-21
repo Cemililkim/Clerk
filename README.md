@@ -50,14 +50,40 @@ Create a free, open-source standard where developers never have to choose betwee
 
 ## 📥 Download
 
-**Latest Version:** v1.0.0 (October 20, 2025)
+**Latest Version:** v1.1.0 (Unreleased)
 
 ### Windows
-- [**Clerk_1.0.0_x64-setup.exe**](https://github.com/Cemililkim/Clerk/releases/download/v1.0.0/Clerk_1.0.0_x64-setup.exe) (Recommended)
+- [**Clerk_1.1.0_x64-setup.exe**](https://github.com/Cemililkim/Clerk/releases/download/v1.1.0/Clerk_1.1.0_x64-setup.exe) (Planned)
 
 > **Note:** macOS and Linux builds are planned for future releases.
 
 [**View All Releases →**](https://github.com/Cemililkim/Clerk/releases)
+
+---
+
+## What's new (short)
+
+- Session persistence fixes and improved CLI compatibility with GUI
+- New full-featured CLI (19 commands) and CLI Quick Start Guide inside the app
+- Encryption interoperability fixes (AAD alignment)
+
+For full details see `RELEASE_NOTES.md` and `CHANGELOG.md`.
+
+---
+
+## Release checklist (for maintainers)
+
+Before publishing a release, follow this checklist:
+
+- [ ] Update `CHANGELOG.md` with any final notes under Unreleased
+- [ ] Bump versions in `package.json` / `Cargo.toml`
+- [ ] Build release artifacts: `pnpm build && pnpm tauri build`
+- [ ] Verify checksums and code signing (if applicable)
+- [ ] Create Git tag `vX.Y.Z` and push to GitHub
+- [ ] Publish GitHub Release with `RELEASE_NOTES.md` summary and attach installers
+- [ ] Announce release in project README and docs
+
+See `RELEASE_NOTES.md` for a concise summary of the latest release.
 
 ---
 
@@ -139,8 +165,6 @@ clerk/
 Clerk integrates with your operating system's secure credential storage for seamless auto-unlock:
 
 - **Windows**: Uses Windows Credential Manager
-- **macOS**: Uses Keychain Services
-- **Linux**: Uses Secret Service API (libsecret/gnome-keyring)
 
 **How it works:**
 1. When unlocking your vault, check the **"Remember me"** checkbox
@@ -150,7 +174,7 @@ Clerk integrates with your operating system's secure credential storage for seam
 
 **Security Notes:**
 - The encryption key (not your master password) is stored in the OS keychain
-- Your OS authentication (Windows login, macOS password, etc.) protects the keychain
+- Your OS authentication (Windows login etc.) protects the keychain
 - Locking the vault completely removes the key from the keychain
 - This feature is optional - you can always unlock without checking the box
 
@@ -292,18 +316,6 @@ clerk s NEW_VAR value -p my-app -e dev
 clerk lock
 # 🔒 Session cleared. You'll need to enter your password for the next command.
 ```
-
-#### Automation Example
-
-```bash
-# CI/CD Pipeline example
-clerk unlock                                    # Unlock once
-clerk import .env.prod -p api -e prod --overwrite  # Import latest config
-clerk run -p api -e prod ./deploy.sh           # Run deployment with env vars
-clerk lock                                      # Clean up session
-```
-
----
 
 ### Desktop App
 

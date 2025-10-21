@@ -11,6 +11,19 @@ Clerk takes security seriously. This document outlines our security practices an
 
 ### Encryption
 
+# Security Policy
+
+Clerk takes security seriously. This document outlines our security practices and how to report vulnerabilities.
+
+**Version:** 1.0.0  
+**Last Updated:** October 21, 2025
+
+---
+
+## 🔒 Security Architecture
+
+### Encryption
+
 - **Algorithm**: AES-256-GCM (authenticated encryption)
 - **Key Derivation**: Argon2id (memory-hard, GPU-resistant)
 - **Salt**: Unique 16-byte random salt per vault
@@ -19,8 +32,7 @@ Clerk takes security seriously. This document outlines our security practices an
 ### Data Storage
 
 - **Database**: SQLite with encrypted values
-- **Vault Location**: 
-  - Windows: `%APPDATA%\com.clerk.app\`
+- **Vault Location (example)**: `%APPDATA%\Clerk\` (Windows)
 - **Key Storage**: Windows Credential Manager (OS-level encryption)
 - **Backup**: User-controlled, encrypted with same key
 
@@ -35,25 +47,14 @@ Clerk takes security seriously. This document outlines our security practices an
 
 ## 🛡️ Security Features
 
-### Local-First Architecture
+- ✅ **Local-First Architecture** — all data stays on device; no cloud sync by default
+- ✅ **Audit Logging** — encrypted operation logs with timestamps
+- ✅ **Update Verification** — releases are distributed via GitHub Releases with checksums
 
-- ✅ **No cloud sync** - all data stays on your device
-- ✅ **Fully offline** - no internet connection required
-- ✅ **No telemetry** - zero data collection
-- ✅ **No analytics** - complete privacy
+### Session & CLI notes
 
-### Audit Logging
-
-- All vault operations logged with timestamps
-- Logs stored encrypted in vault database
-- View history in Settings → Audit Log
-
-### Update Security
-
-- Manual update checks (no automatic connections)
-- Updates downloaded from GitHub Releases
-- SHA-256 checksums provided for verification
-- No auto-update (user controlled)
+- CLI session cache is stored in a temporary file named like `.clerk_session-{hash}` in the OS temp directory. The file contains the vault-derived encryption context and is intended to be readable only by the current user. It is removed on explicit `clerk lock` or when the session expires.
+- Avoid storing vault master passwords in scripts or CI. Use the CLI session flow for automation or provide environment variables to secure runners.
 
 ---
 
@@ -61,40 +62,15 @@ Clerk takes security seriously. This document outlines our security practices an
 
 ### What Clerk Protects Against
 
-✅ **File System Access**
-- Variables encrypted at rest
-- Cannot be read without master password
-
-✅ **Memory Dumps**
-- Sensitive data zeroized after use
-- Minimized exposure time in memory
-
-✅ **Offline Attacks**
-- Argon2id makes brute-force expensive
-- Unique salt prevents rainbow tables
-
-✅ **Shoulder Surfing**
-- Auto-lock after inactivity
-- Hidden values by default in UI
+- **File System Access** — Variables encrypted at rest and require master password to decrypt
+- **Memory Dumps** — Sensitive data zeroized after use; minimized exposure time in memory
+- **Offline Attacks** — Argon2id slows brute force; unique salt prevents rainbow-table attacks
 
 ### What Clerk Does NOT Protect Against
 
-❌ **Malware on Your Device**
-- If your system is compromised, Clerk cannot protect you
-- Keyloggers can capture master password
-- Memory scrapers can extract decryption keys
-
-❌ **Physical Access to Unlocked Vault**
-- If attacker has access while vault is unlocked
-- Use auto-lock and lock manually when done
-
-❌ **Weak Master Passwords**
-- Short or common passwords can be brute-forced
-- Use strong, unique passwords (12+ characters, mixed case, numbers, symbols)
-
-❌ **Social Engineering**
-- Attacker tricking you into revealing password
-- Never share your master password
+- **Malware on Your Device** — If the host is compromised (keyloggers, rootkits), secrets may be exposed
+- **Physical Access to an Unlocked Vault** — If the vault is left unlocked and an attacker has physical access
+- **Weak Master Passwords or Social Engineering**
 
 ---
 
@@ -102,35 +78,19 @@ Clerk takes security seriously. This document outlines our security practices an
 
 If you discover a security vulnerability, please report it responsibly:
 
-### Do NOT:
-- ❌ Open a public GitHub issue
-- ❌ Post in discussions or forums
-- ❌ Exploit the vulnerability
+### DO NOT:
+- Open a public GitHub issue or post in public forums
 
 ### DO:
-- ✅ Email: **cemililkimteke5934@gmail.com**
-- ✅ Subject: `[SECURITY] Clerk Vulnerability Report`
-- ✅ Include:
-  - Description of the vulnerability
-  - Steps to reproduce
-  - Potential impact
-  - Suggested fix (if any)
+- Email: **cemililkimteke5934@gmail.com**
+- Subject: `[SECURITY] Clerk Vulnerability Report`
+- Include: steps to reproduce, impact, suggested fix (optional)
 
-### Response Time
+### Response Targets
+- **Acknowledgment**: within 48 hours
+- **Initial assessment**: within 7 days
 
-- **Acknowledgment**: Within 48 hours
-- **Initial Assessment**: Within 7 days
-- **Fix Timeline**: Depends on severity
-  - Critical: 1-3 days
-  - High: 1-2 weeks
-  - Medium: 2-4 weeks
-  - Low: Next release
-
-### Disclosure Policy
-
-- We follow **responsible disclosure**
-- Security advisories published after fix is released
-- Credit given to reporters (unless anonymity requested)
+We follow a responsible disclosure policy and will publish advisories after fixes are available. Reporters will be credited unless they request anonymity.
 
 ---
 
@@ -138,148 +98,44 @@ If you discover a security vulnerability, please report it responsibly:
 
 ### For Users
 
-1. **Use a Strong Master Password**
-   - 12+ characters
-   - Mix of uppercase, lowercase, numbers, symbols
-   - Unique (not used elsewhere)
-   - Consider using a password manager
-
-2. **Enable Auto-Lock**
-   - Set reasonable timeout (5-15 minutes)
-   - Lock manually when stepping away
-
-3. **Regular Backups**
-   - Backup vault regularly
-   - Store backup securely (encrypted, separate location)
-   - Test restore process
-
-4. **Keep Software Updated**
-   - Install updates promptly
-   - Check for updates regularly (Settings → Software Updates)
-
-5. **Secure Your System**
-   - Use antivirus/anti-malware
-   - Keep OS and all software updated
-   - Use firewall
-   - Don't install untrusted software
+1. Use a strong, unique master password (12+ chars). Consider using a password manager.
+2. Enable auto-lock and lock the vault when not in use.
+3. Backup vaults securely and test restores.
+4. Keep the OS and Clerk updated.
 
 ### For Developers
 
-1. **Code Review**
-   - All security-critical code reviewed
-   - Focus on crypto, auth, data handling
-
-2. **Dependency Management**
-   - Use vetted, audited libraries
-   - Regular dependency updates
-   - Check for known vulnerabilities
-
-3. **Build Security**
-   - Reproducible builds
-   - Signed releases (planned)
-   - Checksum verification
+1. Review security-critical code (crypto, auth, data handling).
+2. Keep dependencies updated and run `cargo audit` / `npm audit` regularly.
+3. Avoid logging secrets or including hardcoded keys.
 
 ---
 
-## 📋 Security Checklist
+## 📋 Security Checklist (for PRs)
 
-When contributing security-sensitive code:
-
-- [ ] Input validation and sanitization
-- [ ] No hardcoded secrets or keys
-- [ ] Proper error handling (fail securely)
-- [ ] Memory cleanup (zeroize sensitive data)
-- [ ] Audit logging for security operations
-- [ ] No debug logging of sensitive data
-- [ ] Tested against common attack vectors
+- Input validation and sanitization
+- No hardcoded secrets
+- Proper error handling (fail securely)
+- Memory cleanup for sensitive data
+- Audit logging for security operations
+- No debug logging of secrets
 
 ---
 
 ## 🔍 Security Audits
 
-### Current Status
-
-- ✅ **Self-Audit**: October 2025 (v1.0.0)
-- ⏳ **Independent Audit**: Not yet conducted
-- ⏳ **Penetration Testing**: Not yet conducted
-
-### Planned
-
-- Professional security audit (when budget allows)
-- Bug bounty program (future consideration)
-- Regular code reviews
+- **Self-audit**: October 2025
+- **Independent audit / pen test**: planned (timeline depends on budget)
 
 ---
 
 ## 📚 Cryptography Details
 
-### Algorithms Used
-
 | Component | Algorithm | Library | Notes |
 |-----------|-----------|---------|-------|
 | Encryption | AES-256-GCM | ring | AEAD (authenticated) |
 | Key Derivation | Argon2id | argon2 | Memory-hard |
-| Password Hashing | Argon2id | argon2 | Same as KDF |
 | Random | OS CSPRNG | ring | Cryptographically secure |
-
-### Why These Choices?
-
-- **AES-256-GCM**: Industry standard, hardware-accelerated, authenticated
-- **Argon2id**: Winner of Password Hashing Competition, memory-hard (GPU-resistant)
-- **ring**: Audited, used by Google, AWS, CloudFlare
-- **argon2**: Reference implementation, widely trusted
-
----
-
-## 🏗️ Secure Development
-
-### Code Review Process
-
-1. All PRs reviewed before merge
-2. Security-critical changes require 2+ reviewers
-3. Automated checks (linting, type checking)
-
-### Testing
-
-- Unit tests for crypto functions
-- Integration tests for vault operations
-- Manual testing of security features
-
-### Dependencies
-
-- Minimal dependencies
-- Prefer audited, well-maintained libraries
-- Regular `npm audit` and `cargo audit`
-
----
-
-## 📊 Known Limitations
-
-1. **Windows Only**
-   - Currently only Windows is officially supported
-   - macOS/Linux support is experimental
-
-2. **Single User**
-   - No multi-user or team features
-   - One vault per system (by design)
-
-3. **No Cloud Sync**
-   - Intentional design choice
-   - Manual backup/restore only
-
-4. **CLI Security**
-   - CLI stores password temporarily in session file
-   - Session file readable only by current user
-   - Deleted on logout or system restart
-
----
-
-## 🔗 Resources
-
-- **OWASP Cheat Sheets**: https://cheatsheetseries.owasp.org/
-- **CWE Top 25**: https://cwe.mitre.org/top25/
-- **Tauri Security**: https://tauri.app/v1/references/architecture/security/
-- **Rust Security**: https://anssi-fr.github.io/rust-guide/
 
 ---
 
@@ -287,9 +143,9 @@ When contributing security-sensitive code:
 
 - **Security Issues**: cemililkimteke5934@gmail.com
 - **General Issues**: https://github.com/Cemililkim/Clerk/issues
-- **Repository**: https://github.com/Cemililkim/Clerk
 
 ---
 
-*Last updated: October 20, 2025*  
-*Clerk v1.0.0 - Free & Open Source*
+*Last updated: October 21, 2025*  
+*Clerk v1.1.0 - Free & Open Source*
+3. **Regular Backups**
