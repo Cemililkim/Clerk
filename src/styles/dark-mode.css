@@ -1,0 +1,1559 @@
+/* ==================== DARK MODE OVERRIDES ==================== */
+
+/* Settings Modal */
+body.dark-mode .settings-modal-close-button {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .settings-modal-close-button:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .settings-modal-section h3 {
+  color: var(--primary-light);
+  border-bottom-color: var(--primary-dark);
+}
+
+body.dark-mode .settings-modal-item label {
+  color: var(--text-primary);
+}
+
+body.dark-mode .settings-modal-description {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .settings-modal-option-button {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .settings-modal-option-button:hover:not(:disabled) {
+  background-color: var(--bg-primary);
+  border-color: var(--primary-dark);
+}
+
+body.dark-mode .settings-modal-option-button.active {
+  background: var(--primary-gradient);
+  color: white;
+  border-color: var(--primary);
+}
+
+body.dark-mode .settings-modal-info-box {
+  background: rgba(var(--primary-shadow), 0.1);
+  border-color: rgba(var(--primary-shadow), 0.3);
+  color: var(--text-secondary);
+}
+
+body.dark-mode .settings-modal-color-button {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.dark-mode .settings-modal-color-button:hover {
+  background-color: var(--bg-primary);
+  border-color: var(--primary-light);
+}
+
+body.dark-mode .settings-modal-color-button.active {
+  background: var(--primary-gradient);
+  border-color: var(--primary);
+  color: white;
+}
+
+body.dark-mode .settings-modal-backup-btn {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .settings-modal-backup-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .settings-modal-backup-btn-title {
+  color: var(--text-primary);
+}
+
+body.dark-mode .settings-modal-backup-btn-subtitle {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .settings-modal-btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .settings-modal-btn-secondary:hover:not(:disabled) {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .settings-modal-loading-state {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .settings-modal-footer {
+  background-color: var(--bg-secondary);
+  border-top-color: var(--border-color);
+}
+
+body.dark-mode .settings-modal-body {
+  background: var(--bg-elevated);
+}
+
+/* VaultUnlock & VaultCreation */
+body.dark-mode .vault-unlock,
+body.dark-mode .vault-creation {
+  background: var(--bg-tertiary);
+}
+
+body.dark-mode .vault-unlock-container,
+body.dark-mode .vault-creation-container {
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-lg);
+}
+
+body.dark-mode .vault-unlock-header h1,
+body.dark-mode .vault-creation-header h1 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-unlock-header p,
+body.dark-mode .vault-creation-header p {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .vault-unlock-icon,
+body.dark-mode .vault-creation-icon {
+  background: color-mix(in srgb, var(--primary-light) 15%, transparent);
+  color: var(--primary-lighter);
+}
+
+body.dark-mode .vault-unlock-password-input-wrapper input,
+body.dark-mode .vault-creation-password-input-wrapper input {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-unlock-password-input-wrapper input::placeholder,
+body.dark-mode .vault-creation-password-input-wrapper input::placeholder {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .vault-unlock-password-input-wrapper input:focus,
+body.dark-mode .vault-creation-password-input-wrapper input:focus {
+  background: var(--bg-primary);
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-light) 15%, transparent);
+}
+
+body.dark-mode .vault-unlock-password-input-wrapper input:disabled,
+body.dark-mode .vault-creation-password-input-wrapper input:disabled {
+  background: var(--bg-primary);
+  opacity: 0.5;
+}
+
+body.dark-mode .vault-unlock-toggle-password,
+body.dark-mode .vault-creation-toggle-password {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .vault-unlock-toggle-password:hover:not(:disabled),
+body.dark-mode .vault-creation-toggle-password:hover:not(:disabled) {
+  color: var(--primary-light);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+body.dark-mode .vault-unlock-error-message,
+body.dark-mode .vault-creation-error-message {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #fca5a5;
+}
+
+body.dark-mode .vault-unlock-checkbox-label {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-unlock-checkbox-label::before {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .vault-unlock-checkbox-label:hover::before {
+  border-color: var(--primary-light);
+  background: color-mix(in srgb, var(--primary-light) 5%, transparent);
+}
+
+body.dark-mode .vault-unlock-checkbox-label:has(input[type='checkbox']:checked)::before {
+  border-color: var(--primary-light);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+}
+
+body.dark-mode .vault-unlock-checkbox-label:has(input[type='checkbox']:disabled)::before {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .vault-unlock-info-box {
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  border-color: color-mix(in srgb, var(--primary) 30%, transparent);
+  border-left-color: var(--primary-light);
+}
+
+body.dark-mode .vault-unlock-info-box svg {
+  color: var(--primary-lighter);
+}
+
+body.dark-mode .vault-unlock-info-box p {
+  color: var(--primary-lighter);
+}
+
+body.dark-mode .vault-creation-password-strength {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .vault-creation-strength-bar {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .vault-creation-strength-label {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .vault-creation-criteria {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .criteria-item {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .criteria-item.invalid {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .criteria-item.valid {
+  color: #10b981;
+}
+
+body.dark-mode .vault-creation-button:disabled {
+  background: var(--bg-primary);
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .vault-creation-warning-box {
+  background: rgba(220, 38, 38, 0.1);
+  border-left-color: #ef4444;
+}
+
+body.dark-mode .vault-creation-warning-box svg {
+  color: #fca5a5;
+}
+
+body.dark-mode .vault-creation-warning-box p {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .vault-creation-warning-box strong {
+  color: #fca5a5;
+}
+
+body.dark-mode .vault-creation-acknowledge {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-creation-acknowledge:hover {
+  background: var(--bg-primary);
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+body.dark-mode .vault-creation-acknowledge::before {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .vault-creation-acknowledge:hover::before {
+  border-color: var(--primary-light);
+  background: color-mix(in srgb, var(--primary-light) 5%, transparent);
+}
+
+body.dark-mode .vault-creation-acknowledge:has(input[type='checkbox']:checked)::before {
+  border-color: var(--primary-light);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+}
+
+body.dark-mode .vault-creation-acknowledge:has(input[type='checkbox']:disabled)::before {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .vault-creation-password-mismatch {
+  background: rgba(220, 38, 38, 0.1);
+  color: #fca5a5;
+}
+
+/* VaultDashboard */
+body.dark-mode .vault-dashboard {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-container {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .vault-dashboard-header {
+  background: var(--bg-elevated);
+  border-bottom-color: var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+body.dark-mode .vault-dashboard-header-left h1 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-logo {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-logo-icon {
+  color: var(--primary-light);
+}
+
+body.dark-mode .vault-dashboard-btn-icon {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .vault-dashboard-btn-icon:hover {
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--primary-light);
+}
+
+body.dark-mode .vault-dashboard-btn-lock {
+  background: transparent;
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-btn-lock:hover {
+  border-color: #ef4444;
+  background: rgba(220, 38, 38, 0.1);
+  color: #fca5a5;
+}
+
+body.dark-mode .vault-dashboard-search {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-search::placeholder {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .vault-dashboard-search:focus {
+  background: var(--bg-primary);
+  border-color: var(--primary-light);
+}
+
+body.dark-mode .vault-dashboard-search-input {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .vault-dashboard-search-input:focus {
+  background: var(--bg-primary);
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-light) 15%, transparent);
+}
+
+body.dark-mode .vault-dashboard-search-icon {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .vault-dashboard-search-clear {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .vault-dashboard-search-clear:hover {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-btn-secondary,
+body.dark-mode .vault-dashboard-btn-lock {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .vault-dashboard-btn-secondary:hover,
+body.dark-mode .vault-dashboard-btn-lock:hover {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .vault-dashboard-btn-danger {
+  background: rgba(220, 38, 38, 0.1);
+  color: #fca5a5;
+}
+
+body.dark-mode .vault-dashboard-sidebar {
+  background: var(--bg-elevated);
+  border-right-color: var(--border-color);
+}
+
+body.dark-mode .vault-dashboard-sidebar-header h2 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-project-list {
+  background: transparent;
+}
+
+body.dark-mode .vault-dashboard-project-item {
+  border-color: transparent;
+}
+
+body.dark-mode .vault-dashboard-project-item:hover {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .vault-dashboard-project-item.selected {
+  background: color-mix(in srgb, var(--primary-light) 15%, transparent);
+  border-color: var(--primary-light);
+}
+
+body.dark-mode .vault-dashboard-project-icon {
+  color: var(--primary-lighter);
+}
+
+body.dark-mode .vault-dashboard-project-item.selected .vault-dashboard-project-icon {
+  color: var(--primary-light);
+}
+
+body.dark-mode .vault-dashboard-project-info h3 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-project-description {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .vault-dashboard-project-card {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .vault-dashboard-project-card:hover {
+  background: var(--bg-primary);
+  border-color: var(--primary-dark);
+}
+
+body.dark-mode .vault-dashboard-project-card.selected {
+  background: color-mix(in srgb, var(--primary-light) 15%, transparent);
+  border-color: var(--primary-light);
+}
+
+body.dark-mode .vault-dashboard-project-card h3 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-project-description {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .vault-dashboard-empty-state {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .vault-dashboard-main-content {
+  background: var(--bg-secondary);
+}
+
+body.dark-mode .vault-dashboard-welcome-content {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .vault-dashboard-welcome-content h2 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-content-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .vault-dashboard-content-title h2 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-content-subtitle {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .vault-dashboard-btn-danger:hover {
+  background: #dc2626;
+}
+
+/* Environment Section */
+body.dark-mode .environment-section-header h3 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .environment-section-state-container {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .environment-section-state-container.empty {
+  background-color: var(--bg-elevated);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .environment-section-state-container p {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .environment-section-content {
+  background: var(--bg-elevated);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .environment-section-tabs {
+  background: var(--bg-secondary);
+  border-bottom-color: var(--border-color);
+  scrollbar-color: var(--border-color) var(--bg-secondary);
+}
+
+body.dark-mode .environment-section-tab {
+  background: transparent;
+  border-right-color: var(--border-color);
+}
+
+body.dark-mode .environment-section-tab:hover {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .environment-section-tab.active {
+  background: var(--bg-elevated);
+  border-bottom-color: var(--primary-light);
+}
+
+body.dark-mode .environment-section-tab-name {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .environment-section-tab.active .environment-section-tab-name {
+  color: var(--primary-light);
+}
+
+body.dark-mode .environment-section-action-btn {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .environment-section-action-btn:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .environment-section-action-btn.danger:hover {
+  background: rgba(220, 38, 38, 0.1);
+  color: #fca5a5;
+}
+
+body.dark-mode .environment-section-state-container {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .environment-section-state-container p {
+  color: var(--text-secondary);
+}
+
+/* Variable List */
+body.dark-mode .variable-list-container {
+  background-color: var(--bg-primary);
+}
+
+body.dark-mode .variable-list-header {
+  background: transparent;
+}
+
+body.dark-mode .variable-list-search-input {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.dark-mode .variable-list-search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .variable-list-search-input:focus {
+  background: var(--bg-primary);
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-light) 15%, transparent);
+}
+
+body.dark-mode .variable-list-search-input:disabled {
+  background-color: var(--bg-primary);
+}
+
+body.dark-mode .variable-list-search-icon {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .variable-list-search-clear {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .variable-list-search-clear:hover {
+  color: var(--text-primary);
+}
+
+body.dark-mode .variable-list-btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .variable-list-btn-secondary:hover:not(:disabled) {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .variable-list-state-container {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .variable-list-state-container.empty {
+  background-color: var(--bg-elevated);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .variable-list-state-container p {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .variable-list-spinner {
+  border-color: color-mix(in srgb, var(--primary-light) 20%, transparent);
+  border-top-color: var(--primary-light);
+}
+
+body.dark-mode .variable-list-table-wrapper {
+  background: var(--bg-elevated);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .variable-list-table thead {
+  background: var(--bg-secondary);
+}
+
+body.dark-mode .variable-list-table th {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .variable-list-table tbody tr:not(:last-child) {
+  border-bottom-color: var(--border-color-light);
+}
+
+body.dark-mode .variable-list-table tbody tr:hover {
+  background: var(--bg-secondary);
+}
+
+body.dark-mode .variable-list-table tbody tr.selected {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+body.dark-mode .variable-list-table tbody tr.selected:hover {
+  background: color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+body.dark-mode .variable-list-table td {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .variable-list-checkbox-btn {
+  color: var(--primary-light);
+}
+
+body.dark-mode .variable-list-checkbox-btn:hover {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
+body.dark-mode .variable-list-bulk-actions {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .variable-list-btn-secondary.active {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+  border-color: var(--primary-light);
+  color: var(--primary-light);
+}
+
+body.dark-mode .variable-list-key code {
+  background: color-mix(in srgb, var(--primary-light) 15%, transparent);
+  color: var(--primary-lighter);
+}
+
+body.dark-mode .variable-list-value-text {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .variable-list-value-hidden {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .variable-list-action-btn {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .variable-list-action-btn:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .variable-list-action-btn.danger:hover {
+  background: rgba(220, 38, 38, 0.1);
+  color: #fca5a5;
+}
+
+/* Modals */
+body.dark-mode .variable-modal-overlay,
+body.dark-mode .environment-modal-overlay,
+body.dark-mode .project-modal-overlay {
+  background: var(--overlay-bg);
+}
+
+body.dark-mode .variable-modal,
+body.dark-mode .variable-modal-content,
+body.dark-mode .environment-modal-content,
+body.dark-mode .project-modal-content,
+body.dark-mode .delete-confirm-modal-content {
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-lg);
+}
+
+body.dark-mode .variable-modal-header,
+body.dark-mode .environment-modal-header,
+body.dark-mode .project-modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .variable-modal-header h2,
+body.dark-mode .environment-modal-header h2,
+body.dark-mode .project-modal-header h2 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .variable-modal-close,
+body.dark-mode .environment-modal-close,
+body.dark-mode .project-modal-close {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .variable-modal-close:hover:not(:disabled),
+body.dark-mode .environment-modal-close:hover:not(:disabled),
+body.dark-mode .project-modal-close:hover:not(:disabled) {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .variable-modal-body,
+body.dark-mode .environment-modal-body,
+body.dark-mode .project-modal-body {
+  background: transparent;
+}
+
+body.dark-mode .variable-modal-label,
+body.dark-mode .environment-modal-label,
+body.dark-mode .project-modal-label,
+body.dark-mode .variable-modal-form-group label,
+body.dark-mode .environment-modal-form-group label,
+body.dark-mode .project-modal-form-group label {
+  color: var(--text-primary);
+}
+
+body.dark-mode .variable-modal-input,
+body.dark-mode .variable-modal-textarea,
+body.dark-mode .environment-modal-input,
+body.dark-mode .environment-modal-textarea,
+body.dark-mode .project-modal-input,
+body.dark-mode .project-modal-textarea,
+body.dark-mode .variable-modal-form-group input,
+body.dark-mode .variable-modal-form-group textarea,
+body.dark-mode .environment-modal-form-group input,
+body.dark-mode .environment-modal-form-group textarea,
+body.dark-mode .project-modal-form-group input,
+body.dark-mode .project-modal-form-group textarea {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.dark-mode .variable-modal-input:focus,
+body.dark-mode .variable-modal-textarea:focus,
+body.dark-mode .environment-modal-input:focus,
+body.dark-mode .environment-modal-textarea:focus,
+body.dark-mode .project-modal-input:focus,
+body.dark-mode .project-modal-textarea:focus,
+body.dark-mode .variable-modal-form-group input:focus,
+body.dark-mode .variable-modal-form-group textarea:focus,
+body.dark-mode .environment-modal-form-group input:focus,
+body.dark-mode .environment-modal-form-group textarea:focus,
+body.dark-mode .project-modal-form-group input:focus,
+body.dark-mode .project-modal-form-group textarea:focus {
+  background: var(--bg-primary);
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-light) 15%, transparent);
+}
+
+body.dark-mode .variable-modal-form-group input:disabled,
+body.dark-mode .variable-modal-form-group textarea:disabled,
+body.dark-mode .environment-modal-form-group input:disabled,
+body.dark-mode .environment-modal-form-group textarea:disabled,
+body.dark-mode .project-modal-form-group input:disabled,
+body.dark-mode .project-modal-form-group textarea:disabled {
+  background: var(--bg-primary);
+  opacity: 0.5;
+}
+
+body.dark-mode .variable-modal-footer,
+body.dark-mode .environment-modal-footer,
+body.dark-mode .project-modal-footer {
+  border-top-color: var(--border-color);
+}
+
+body.dark-mode .variable-modal-validation.valid {
+  color: #34d399;
+}
+
+body.dark-mode .variable-modal-validation.invalid {
+  color: #f87171;
+}
+
+body.dark-mode .variable-modal-btn-cancel,
+body.dark-mode .environment-modal-btn-cancel,
+body.dark-mode .project-modal-btn-cancel {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .variable-modal-btn-cancel:hover,
+body.dark-mode .environment-modal-btn-cancel:hover,
+body.dark-mode .project-modal-btn-cancel:hover {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .variable-modal-error-message,
+body.dark-mode .environment-modal-error-message,
+body.dark-mode .project-modal-error-message {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #fca5a5;
+}
+
+/* Delete Confirm Modal */
+body.dark-mode .delete-confirm-modal-icon-wrapper {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+body.dark-mode .delete-confirm-modal-body h2 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .delete-confirm-modal-body p {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .delete-confirm-modal-item-name {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+body.dark-mode .delete-confirm-modal-item-name code {
+  color: #fca5a5;
+}
+
+body.dark-mode .delete-confirm-modal-warning {
+  color: #fca5a5 !important;
+}
+
+body.dark-mode .delete-confirm-modal-error-message {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #fca5a5;
+}
+
+body.dark-mode .delete-confirm-modal-footer {
+  background-color: var(--bg-secondary);
+  border-top-color: var(--border-color);
+}
+
+body.dark-mode .delete-confirm-modal-btn-cancel {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .delete-confirm-modal-btn-cancel:hover:not(:disabled) {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .delete-confirm-modal-btn-confirm:hover {
+  background: #dc2626;
+}
+
+/* Toast */
+body.dark-mode .toast {
+  background: var(--bg-elevated);
+  border-color: var(--border-color);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .toast:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .toast-message {
+  color: var(--text-primary);
+}
+
+body.dark-mode .toast-close {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .toast-close:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .toast-success {
+  border-left-color: #22c55e;
+}
+
+body.dark-mode .toast-error {
+  border-left-color: #ef4444;
+}
+
+body.dark-mode .toast-warning {
+  border-left-color: #f97316;
+}
+
+body.dark-mode .toast-info {
+  border-left-color: var(--primary-light);
+}
+
+/* Action Buttons */
+body.dark-mode .variable-list-action-btn,
+body.dark-mode .environment-section-action-btn {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+body.dark-mode .variable-list-action-btn:hover,
+body.dark-mode .environment-section-action-btn:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .variable-list-action-btn.danger:hover,
+body.dark-mode .environment-section-action-btn.danger:hover {
+  background: rgba(220, 38, 38, 0.1);
+  color: #ef4444;
+}
+
+/* Audit Log */
+body.dark-mode .audit-log-overlay {
+  background: var(--overlay-bg);
+}
+
+body.dark-mode .audit-log-modal {
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-lg);
+}
+
+body.dark-mode .audit-log-header {
+  background: transparent;
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-header h2 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .audit-log-close-button {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .audit-log-close-button:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .audit-log-controls {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-btn-secondary:hover {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-filter-toggle {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-filter-toggle:hover {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-filter-toggle.active {
+  background-color: color-mix(in srgb, var(--primary-light) 15%, transparent);
+  border-color: var(--primary-light);
+  color: var(--primary-lighter);
+}
+
+body.dark-mode .audit-log-filters-panel {
+  background: var(--bg-secondary);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-filter-group label {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .audit-log-clear-filters-button {
+  background: rgba(220, 38, 38, 0.1);
+  color: #fca5a5;
+}
+
+body.dark-mode .audit-log-clear-filters-button:hover {
+  background: rgba(220, 38, 38, 0.2);
+}
+
+body.dark-mode .audit-log-select-button {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-select-button:hover:not(:disabled) {
+  border-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-select-button:focus-visible {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-light) 15%, transparent);
+}
+
+body.dark-mode .audit-log-select-arrow {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .audit-log-select-options {
+  background: var(--bg-elevated);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+body.dark-mode .audit-log-select-option {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .audit-log-select-option:hover {
+  background: color-mix(in srgb, var(--primary-light) 15%, transparent);
+  color: var(--primary-lighter);
+}
+
+body.dark-mode .audit-log-select-option.selected {
+  color: var(--primary-light);
+}
+
+body.dark-mode .audit-log-table {
+  background: transparent;
+}
+
+body.dark-mode .audit-log-table thead {
+  background: var(--bg-elevated);
+}
+
+body.dark-mode .audit-log-table th {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-table tbody tr {
+  border-bottom-color: var(--border-color-light);
+}
+
+body.dark-mode .audit-log-table tbody tr:hover {
+  background: var(--bg-secondary);
+}
+
+body.dark-mode .audit-log-table td {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .audit-log-table tbody tr td:first-child {
+  color: var(--text-primary);
+}
+
+body.dark-mode .audit-log-empty-state {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .audit-log-empty-state h3 {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .audit-log-footer {
+  background: var(--bg-secondary);
+  border-top-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-pagination {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .audit-log-page-button {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .audit-log-page-button:hover:not(:disabled) {
+  background: var(--bg-secondary);
+}
+
+body.dark-mode .audit-log-page-button.active {
+  background: var(--purple-gradient);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* ==================== EMPTY STATE TITLES & DESCRIPTIONS ==================== */
+
+/* VaultDashboard Empty States */
+body.dark-mode .vault-dashboard-empty-title {
+  color: var(--text-primary);
+}
+
+body.dark-mode .vault-dashboard-empty-description {
+  color: var(--text-secondary);
+}
+
+/* VariableList Empty States */
+body.dark-mode .variable-list-empty-title {
+  color: var(--text-primary);
+}
+
+body.dark-mode .variable-list-empty-description {
+  color: var(--text-secondary);
+}
+
+/* EnvironmentSection Empty States */
+body.dark-mode .environment-section-empty-title {
+  color: var(--text-primary);
+}
+
+body.dark-mode .environment-section-empty-description {
+  color: var(--text-secondary);
+}
+
+/* ==================== VARIABLE VALIDATION ==================== */
+
+body.dark-mode .variable-validation-indicator.valid .validation-icon {
+  color: #34d399;
+}
+
+body.dark-mode .variable-validation-indicator.invalid .validation-icon {
+  color: #f87171;
+}
+
+/* ==================== EXPORT MODAL ==================== */
+
+body.dark-mode .export-modal {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .export-modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .export-modal-header h2 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .export-modal-close {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .export-modal-close:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .export-modal-subtitle {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .export-modal-subtitle strong {
+  color: var(--primary-light);
+}
+
+body.dark-mode .export-modal-section-label {
+  color: var(--text-primary);
+}
+
+body.dark-mode .export-modal-format-option {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .export-modal-format-option:hover {
+  background: color-mix(in srgb, var(--bg-secondary) 70%, white);
+  border-color: var(--primary-dark);
+}
+
+body.dark-mode .export-modal-format-option.selected {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+  border-color: var(--primary);
+}
+
+body.dark-mode .export-modal-format-icon {
+  background: var(--bg-primary);
+  color: var(--primary-light);
+}
+
+body.dark-mode .export-modal-format-option.selected .export-modal-format-icon {
+  background: var(--primary);
+  color: white;
+}
+
+body.dark-mode .export-modal-format-label {
+  color: var(--text-primary);
+}
+
+body.dark-mode .export-modal-format-description {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .export-modal-checkbox {
+  background: var(--bg-secondary);
+}
+
+body.dark-mode .export-modal-checkbox:hover {
+  background: color-mix(in srgb, var(--bg-secondary) 70%, white);
+}
+
+body.dark-mode .export-modal-checkbox span {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .export-modal-footer {
+  border-top-color: var(--border-color);
+}
+
+body.dark-mode .export-modal-btn-cancel {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .export-modal-btn-cancel:hover {
+  border-color: var(--primary-dark);
+  background: var(--bg-primary);
+}
+
+/* ============================================================================
+   BACKUP MODAL
+   ============================================================================ */
+
+body.dark-mode .backup-modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .backup-modal {
+  background: var(--bg-secondary);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .backup-modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .backup-modal-title {
+  color: var(--text-primary);
+}
+
+body.dark-mode .backup-modal-close {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .backup-modal-close:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+body.dark-mode .backup-modal-info {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+  color: var(--text-secondary);
+}
+
+body.dark-mode .backup-stat-item {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .backup-stat-label {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .backup-stat-value {
+  color: var(--text-primary);
+}
+
+body.dark-mode .backup-modal-size-info {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .backup-size-label {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .backup-size-value {
+  color: var(--text-primary);
+}
+
+body.dark-mode .backup-modal-tips {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .backup-modal-tips h4 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .backup-modal-tips li {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .spinner {
+  border-color: var(--bg-primary);
+  border-top-color: var(--primary);
+}
+
+body.dark-mode .backup-progress-text {
+  color: var(--text-primary);
+}
+
+body.dark-mode .backup-progress-hint {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .backup-modal-success h3 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .backup-success-message {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .backup-success-path {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .backup-path-label {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .backup-path-value {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .backup-success-tips p {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .backup-modal-error h3 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .backup-error-message {
+  color: var(--text-secondary);
+  background: color-mix(in srgb, #ef4444 15%, transparent);
+  border-color: color-mix(in srgb, #ef4444 40%, transparent);
+}
+
+body.dark-mode .backup-modal-footer {
+  border-top-color: var(--border-color);
+}
+
+body.dark-mode .backup-modal-btn-secondary {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .backup-modal-btn-secondary:hover {
+  background: var(--bg-hover);
+}
+
+/* ============================================================================
+   RESTORE MODAL
+   ============================================================================ */
+
+body.dark-mode .restore-modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .restore-modal {
+  background: var(--bg-secondary);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .restore-modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .restore-modal-title {
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-modal-close {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .restore-modal-close:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-modal-warning {
+  background: color-mix(in srgb, #f59e0b 15%, transparent);
+  border-color: color-mix(in srgb, #f59e0b 40%, transparent);
+  color: var(--text-secondary);
+}
+
+body.dark-mode .restore-modal-warning strong {
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-modal-tips {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .restore-modal-tips h4 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-modal-tips li {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .restore-progress-text {
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-progress-hint {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .restore-preview-header h3 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-preview-badge {
+  background: color-mix(in srgb, #22c55e 20%, transparent);
+  color: #34d399;
+}
+
+body.dark-mode .restore-info-item {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .restore-info-label {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .restore-info-value {
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-stat-card {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .restore-stat-label {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .restore-file-path {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .restore-path-label {
+  color: var(--text-tertiary);
+}
+
+body.dark-mode .restore-path-value {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-modal-success h3 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-success-message {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .restore-success-tips p {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .restore-modal-error h3 {
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-error-message {
+  color: var(--text-secondary);
+  background: color-mix(in srgb, #ef4444 15%, transparent);
+  border-color: color-mix(in srgb, #ef4444 40%, transparent);
+}
+
+body.dark-mode .restore-modal-footer {
+  border-top-color: var(--border-color);
+}
+
+body.dark-mode .restore-modal-btn-secondary {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .restore-modal-btn-secondary:hover {
+  background: var(--bg-hover);
+}

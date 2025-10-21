@@ -1,0 +1,194 @@
+.environment-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: environment-modal-fadeIn 0.2s ease-out;
+}
+
+.environment-modal-content {
+  background: white;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: environment-modal-slideUp 0.3s ease-out;
+  overflow: hidden;
+}
+
+.environment-modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.environment-modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.environment-modal-header h2 svg {
+  color: var(--primary);
+}
+
+.environment-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.environment-modal-close:hover:not(:disabled) {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.environment-modal-body {
+  padding: 1.5rem;
+}
+
+.environment-modal-form-group {
+  margin-bottom: 1.25rem;
+}
+
+.environment-modal-form-group:last-of-type {
+  margin-bottom: 0;
+}
+
+.environment-modal-form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.environment-modal-required {
+  color: #dc2626;
+  margin-left: 2px;
+}
+
+.environment-modal-form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  transition: all 0.2s;
+  box-sizing: border-box;
+  background: #fafafa;
+  color: #1f2937;
+}
+
+.environment-modal-form-group input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: white;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.environment-modal-form-group input:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.environment-modal-hint {
+  margin: 0.5rem 0 0 0.25rem;
+  font-size: 0.8125rem;
+  color: #6b7280;
+}
+
+.environment-modal-error-message {
+  margin-bottom: 1.25rem;
+  padding: 0.875rem 1rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  color: #dc2626;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: environment-modal-shake 0.3s ease;
+}
+
+.environment-modal-footer {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+.environment-modal-btn-cancel,
+.environment-modal-btn-submit {
+    padding: 0.625rem 1.25rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.environment-modal-btn-cancel {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.environment-modal-btn-cancel:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.environment-modal-btn-submit {
+  color: white;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  box-shadow: 0 2px 8px var(--primary-shadow);
+}
+
+.environment-modal-btn-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--primary-shadow-hover);
+}
+
+.environment-modal-btn-cancel:disabled,
+.environment-modal-btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@keyframes environment-modal-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@keyframes environment-modal-slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes environment-modal-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}

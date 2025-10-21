@@ -1,0 +1,409 @@
+.vault-creation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--bg-tertiary);
+  padding: 2rem;
+}
+
+.vault-creation-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+  max-width: 420px;
+  width: 100%;
+  padding: 2rem;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.vault-creation-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.vault-creation-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary-bg-light) 0%, var(--primary-border) 100%);
+  border-radius: 16px;
+  color: var(--primary);
+}
+
+.vault-creation-header h1 {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.375rem 0;
+}
+
+.vault-creation-header p {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 400;
+}
+
+.vault-creation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.vault-creation-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vault-creation-password-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.vault-creation-password-input-wrapper input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.875rem 1rem;
+  font-size: 0.9375rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  background: #fafafa;
+  color: #1f2937;
+}
+
+.vault-creation-password-input-wrapper input::placeholder {
+  color: #9ca3af;
+}
+
+.vault-creation-password-input-wrapper input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: white;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.vault-creation-password-input-wrapper input::-ms-reveal,
+.vault-creation-password-input-wrapper input::-ms-clear {
+  display: none;
+}
+.vault-creation-password-input-wrapper input::-webkit-reveal,
+.vault-creation-password-input-wrapper input::-webkit-password-toggle-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.vault-creation-password-input-wrapper input:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.vault-creation-toggle-password {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #6b7280;
+  border-radius: 6px;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.vault-creation-toggle-password:hover:not(:disabled) {
+  color: var(--primary);
+  background: rgba(var(--primary-shadow), 0.25);
+}
+
+.vault-creation-toggle-password:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.vault-creation-password-strength {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 0 0.25rem;
+}
+
+.vault-creation-strength-bar {
+  flex: 1;
+  height: 6px;
+  background-color: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.vault-creation-strength-fill {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  border-radius: 3px;
+}
+
+.vault-creation-strength-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  min-width: 50px;
+  text-align: right;
+}
+
+.vault-creation-criteria {
+  background-color: #f9fafb;
+  border-radius: 10px;
+  padding: 0.875rem 1rem;
+}
+
+.vault-creation-criteria ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.criteria-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.criteria-item svg {
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.criteria-item.invalid {
+  color: #6b7280;
+}
+
+.criteria-item.valid {
+  color: #16a34a;
+}
+
+.vault-creation-error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  color: #dc2626;
+  font-size: 0.875rem;
+  font-weight: 600;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.vault-creation-button {
+  width: 100%;
+  padding: 0.8125rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.25rem;
+  box-shadow: 0 2px 8px var(--primary-shadow);
+}
+
+.vault-creation-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--primary-shadow-hover);
+}
+
+.vault-creation-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.vault-creation-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  background: #d1d5db;
+  box-shadow: none;
+}
+
+.vault-creation-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.875rem;
+}
+
+.vault-creation-warning-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: #fef2f2;
+  border-radius: 8px;
+  border-left: 3px solid #dc2626;
+}
+
+.vault-creation-warning-box svg {
+  flex-shrink: 0;
+  color: #dc2626;
+  margin-top: 0.125rem;
+}
+
+.vault-creation-warning-box p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #7f1d1d;
+  line-height: 1.4;
+}
+
+.vault-creation-warning-box strong {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.vault-creation-acknowledge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: #1f2937;
+  font-weight: 500;
+  user-select: none;
+  padding: 0.875rem 1rem;
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.vault-creation-acknowledge:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary-shadow), 0.25);
+}
+
+/* Hide default checkbox */
+.vault-creation-acknowledge input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Custom checkbox container */
+.vault-creation-acknowledge::before {
+  content: '';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* Hover state */
+.vault-creation-acknowledge:hover::before {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 2%, transparent);
+}
+
+/* Checked state - change box color */
+.vault-creation-acknowledge input[type='checkbox']:checked + *::before,
+.vault-creation-acknowledge:has(input[type='checkbox']:checked)::before {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+}
+
+/* Checkmark */
+.vault-creation-acknowledge::after {
+  content: '';
+  position: absolute;
+  left: 1.45rem;
+  top: 50%;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2.5px 2.5px 0;
+  transform: translateY(-60%) rotate(45deg) scale(0);
+  transition: transform 0.2s ease;
+  opacity: 0;
+}
+
+/* Show checkmark when checked */
+.vault-creation-acknowledge:has(input[type='checkbox']:checked)::after {
+  transform: translateY(-60%) rotate(45deg) scale(1);
+  opacity: 1;
+}
+
+/* Disabled state */
+.vault-creation-acknowledge:has(input[type='checkbox']:disabled) {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.vault-creation-acknowledge:has(input[type='checkbox']:disabled)::before {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+}
+
+.vault-creation-acknowledge span {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.vault-creation-password-mismatch {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: #fef2f2;
+  color: #dc2626;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 600px) {
+  .vault-creation {
+    padding: 1rem;
+  }
+  .vault-creation-container {
+    padding: 2rem 1.5rem;
+  }
+}

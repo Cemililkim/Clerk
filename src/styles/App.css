@@ -1,0 +1,242 @@
+/* ==================== SMOOTH THEME TRANSITIONS ==================== */
+
+/* Smooth transitions for theme and dark mode changes */
+* {
+  transition: background-color 0.3s ease, 
+              border-color 0.3s ease, 
+              color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Disable transitions for animations that should be instant */
+*:has(> .no-transition),
+.no-transition,
+[data-instant] {
+  transition: none !important;
+}
+
+/* Main App Loading State */
+.app-loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--bg-tertiary);
+  gap: 1.5rem;
+}
+
+.app-loading-spinner {
+  color: var(--primary);
+  animation: app-spin 1s linear infinite;
+}
+
+.app-loading-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #1f2937;
+  margin: 0;
+}
+
+@keyframes app-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==================== DARK MODE ==================== */
+
+/* Light Mode Variables (default) */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f5ebfa;
+  --bg-elevated: #ffffff;
+  
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  
+  --border-color: #e5e7eb;
+  --border-color-light: #f3f4f6;
+  --border-color-purple: #e9d5ff;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.2);
+  
+  --overlay-bg: rgba(17, 24, 39, 0.6);
+  
+  /* Default: Purple theme */
+  --primary: #9333ea;
+  --primary-light: #a855f7;
+  --primary-lighter: #c084fc;
+  --primary-dark: #7c3aed;
+  --primary-bg-light: #f3e8ff;
+  --primary-bg-lighter: #faf5ff;
+  --primary-border: #e9d5ff;
+  --primary-gradient: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  --primary-shadow: rgba(147, 51, 234, 0.2);
+  --primary-shadow-hover: rgba(147, 51, 234, 0.3);
+}
+
+/* ==================== THEME COLORS ==================== */
+
+/* Purple Theme (Default) */
+body.theme-purple {
+  --primary: #9333ea;
+  --primary-light: #a855f7;
+  --primary-lighter: #c084fc;
+  --primary-dark: #7c3aed;
+  --primary-bg-light: #f3e8ff;
+  --primary-bg-lighter: #faf5ff;
+  --primary-border: #e9d5ff;
+  --primary-gradient: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  --primary-shadow: rgba(147, 51, 234, 0.2);
+  --primary-shadow-hover: rgba(147, 51, 234, 0.3);
+}
+
+body.theme-purple .app-loading-container,
+body.theme-purple .vault-unlock,
+body.theme-purple .vault-creation {
+  background: #f5ebfa;
+}
+
+body.theme-purple.dark-mode {
+  --bg-tertiary: #1e1428;
+}
+
+/* Blue Theme */
+body.theme-blue {
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-lighter: #60a5fa;
+  --primary-dark: #1d4ed8;
+  --primary-bg-light: #dbeafe;
+  --primary-bg-lighter: #eff6ff;
+  --primary-border: #bfdbfe;
+  --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  --primary-shadow: rgba(37, 99, 235, 0.2);
+  --primary-shadow-hover: rgba(37, 99, 235, 0.3);
+}
+
+body.theme-blue .app-loading-container,
+body.theme-blue .vault-unlock,
+body.theme-blue .vault-creation {
+  background: #eff6ff;
+}
+
+body.theme-blue.dark-mode {
+  --bg-tertiary: #0f1729;
+}
+
+/* Green Theme */
+body.theme-green {
+  --primary: #059669;
+  --primary-light: #10b981;
+  --primary-lighter: #34d399;
+  --primary-dark: #047857;
+  --primary-bg-light: #d1fae5;
+  --primary-bg-lighter: #ecfdf5;
+  --primary-border: #a7f3d0;
+  --primary-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --primary-shadow: rgba(5, 150, 105, 0.2);
+  --primary-shadow-hover: rgba(5, 150, 105, 0.3);
+}
+
+body.theme-green .app-loading-container,
+body.theme-green .vault-unlock,
+body.theme-green .vault-creation {
+  background: #ecfdf5;
+}
+
+body.theme-green.dark-mode {
+  --bg-tertiary: #0a1f1a;
+}
+
+/* Orange Theme */
+body.theme-orange {
+  --primary: #ea580c;
+  --primary-light: #f97316;
+  --primary-lighter: #fb923c;
+  --primary-dark: #c2410c;
+  --primary-bg-light: #fed7aa;
+  --primary-bg-lighter: #fff7ed;
+  --primary-border: #fdba74;
+  --primary-gradient: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  --primary-shadow: rgba(234, 88, 12, 0.2);
+  --primary-shadow-hover: rgba(234, 88, 12, 0.3);
+}
+
+body.theme-orange .app-loading-container,
+body.theme-orange .vault-unlock,
+body.theme-orange .vault-creation {
+  background: #fff7ed;
+}
+
+body.theme-orange.dark-mode {
+  --bg-tertiary: #1f1410;
+}
+
+/* Pink Theme */
+body.theme-pink {
+  --primary: #db2777;
+  --primary-light: #ec4899;
+  --primary-lighter: #f472b6;
+  --primary-dark: #be185d;
+  --primary-bg-light: #fce7f3;
+  --primary-bg-lighter: #fdf2f8;
+  --primary-border: #fbcfe8;
+  --primary-gradient: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  --primary-shadow: rgba(219, 39, 119, 0.2);
+  --primary-shadow-hover: rgba(219, 39, 119, 0.3);
+}
+
+body.theme-pink .app-loading-container,
+body.theme-pink .vault-unlock,
+body.theme-pink .vault-creation {
+  background: #fdf2f8;
+}
+
+body.theme-pink.dark-mode {
+  --bg-tertiary: #1f0d17;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-elevated: #242424;
+  
+  --text-primary: #f3f4f6;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  
+  --border-color: #3f3f3f;
+  --border-color-light: #333333;
+  --border-color-purple: #4c1d95;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+  
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+}
+
+/* Apply dark mode styles */
+body.dark-mode {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Dark mode for loading screen */
+body.dark-mode .app-loading-container {
+  background: var(--bg-tertiary);
+}
+
+body.dark-mode .app-loading-text {
+  color: var(--text-primary);
+}

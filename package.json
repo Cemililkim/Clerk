@@ -1,0 +1,75 @@
+{
+  "name": "clerk",
+  "version": "1.0.0",
+  "description": "Secure, local-first environment variable manager",
+  "private": true,
+  "type": "module",
+  "author": {
+    "name": "Cemil İlkim Teke",
+    "email": "cemililkimteke5934@gmail.com"
+  },
+  "keywords": [
+    "environment-variables",
+    "secrets-management",
+    "encryption",
+    "security",
+    "tauri",
+    "desktop-app"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "tauri:build:debug": "tauri build --debug",
+    "build:all": "pnpm build && tauri build",
+    "build:windows": "pnpm build && tauri build --target x86_64-pc-windows-msvc",
+    "build:macos": "pnpm build && tauri build --target universal-apple-darwin",
+    "build:macos:x64": "pnpm build && tauri build --target x86_64-apple-darwin",
+    "build:macos:arm": "pnpm build && tauri build --target aarch64-apple-darwin",
+    "build:linux": "pnpm build && tauri build --target x86_64-unknown-linux-gnu",
+    "build:linux:arm": "pnpm build && tauri build --target aarch64-unknown-linux-gnu",
+    "release": "node scripts/release.js",
+    "release:windows": "powershell -ExecutionPolicy Bypass -File scripts/build.ps1",
+    "release:unix": "bash scripts/build.sh",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css,md}\"",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.1.1",
+    "@tauri-apps/plugin-dialog": "^2.4.0",
+    "@tauri-apps/plugin-shell": "^2.0.1",
+    "lucide-react": "^0.546.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-window": "^2.2.1"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.1.0",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/react-window": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.15.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "eslint-plugin-security": "^3.0.1",
+    "globals": "^16.4.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.46.1",
+    "vite": "^6.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

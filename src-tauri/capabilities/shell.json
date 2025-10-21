@@ -1,0 +1,15 @@
+{
+  "identifier": "shell-capability",
+  "description": "Capability for opening GitHub URLs",
+  "windows": ["main"],
+  "permissions": [
+    {
+      "identifier": "shell:allow-open",
+      "allow": [
+        {
+          "url": "https://github.com/**"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Clerk",
+  "version": "1.0.0",
+  "identifier": "com.clerk.app",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Clerk - Secure Environment Manager",
+        "width": 1200,
+        "height": 800,
+        "minWidth": 800,
+        "minHeight": 600,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true,
+        "decorations": true,
+        "transparent": false
+      }
+    ],
+    "security": {
+      "csp": null,
+      "dangerousDisableAssetCspModification": false
+    },
+    "withGlobalTauri": false
+  },
+  "plugins": {
+    "shell": {
+      "open": true
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "publisher": "Clerk Project",
+    "homepage": "https://github.com/Cemililkim/Clerk",
+    "shortDescription": "Secure environment variable manager with encryption",
+    "longDescription": "Clerk is a free, open-source desktop application for securely managing environment variables across multiple projects and environments. Features AES-256-GCM encryption, audit logging, CLI integration, and cross-platform support.",
+    "category": "DeveloperTool",
+    "resources": [],
+    "copyright": "Copyright © 2025 Clerk Project",
+    "licenseFile": "../LICENSE",
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": "",
+      "wix": {
+        "language": "en-US",
+        "template": null,
+        "fragmentPaths": [],
+        "componentRefs": [],
+        "featureRefs": [],
+        "mergeRefs": [],
+        "dialogImagePath": null,
+        "bannerPath": null
+      },
+      "nsis": {
+        "headerImage": null,
+        "sidebarImage": null,
+        "installerIcon": "icons/icon.ico",
+        "installMode": "currentUser",
+        "languages": ["English"],
+        "displayLanguageSelector": false,
+        "customLanguageFiles": {},
+        "template": null,
+        "compression": "lzma"
+      },
+      "allowDowngrades": false,
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      }
+    },
+    "macOS": {
+      "frameworks": [],
+      "minimumSystemVersion": "10.13",
+      "exceptionDomain": "",
+      "signingIdentity": null,
+      "providerShortName": null,
+      "entitlements": null,
+      "dmg": {
+        "background": null,
+        "windowSize": {
+          "width": 600,
+          "height": 400
+        },
+        "appPosition": {
+          "x": 180,
+          "y": 170
+        },
+        "applicationFolderPosition": {
+          "x": 420,
+          "y": 170
+        }
+      },
+      "files": {}
+    },
+    "linux": {
+      "deb": {
+        "depends": [],
+        "files": {},
+        "desktopTemplate": null,
+        "section": "utils",
+        "priority": "optional"
+      },
+      "appimage": {
+        "bundleMediaFramework": false,
+        "files": {}
+      },
+      "rpm": {
+        "epoch": 0,
+        "release": "1",
+        "files": {},
+        "desktopTemplate": null
+      }
+    },
+    "externalBin": []
+  }
+}
