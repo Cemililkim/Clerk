@@ -2,8 +2,8 @@
 
 Clerk takes security seriously. This document outlines our security practices and how to report vulnerabilities.
 
-**Version:** 1.0.0  
-**Last Updated:** October 20, 2025
+**Version:** 1.1.0  
+**Last Updated:** October 22, 2025
 
 ---
 
@@ -15,8 +15,8 @@ Clerk takes security seriously. This document outlines our security practices an
 
 Clerk takes security seriously. This document outlines our security practices and how to report vulnerabilities.
 
-**Version:** 1.0.0  
-**Last Updated:** October 21, 2025
+**Version:** 1.1.0  
+**Last Updated:** October 22, 2025
 
 ---
 

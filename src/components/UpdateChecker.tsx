@@ -12,7 +12,7 @@ interface GitHubRelease {
 }
 
 // Read version from package.json at build time
-const currentVersion = '1.0.0';
+import { VERSION as currentVersion } from '../version';
 
 export function UpdateChecker() {
   const [checking, setChecking] = useState(false);

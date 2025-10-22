@@ -115,7 +115,7 @@ export function exportProjectToJSON(
       })),
     })),
     exportedAt: new Date().toISOString(),
-  version: '1.0.0',
+  version: '1.1.0',
   };
   
   return JSON.stringify(data, null, 2);

@@ -116,7 +116,7 @@ pub fn create_backup(
     
     // Create metadata
     let metadata = BackupMetadata {
-        version: "1.0.0".to_string(),
+        version: "1.1.0".to_string(),
         created_at: chrono::Utc::now().to_rfc3339(),
         vault_name,
         project_count,
@@ -150,9 +150,9 @@ pub fn restore_backup(
         .map_err(|e| format!("Invalid backup file format: {}", e))?;
     
     // Validate backup version
-    if backup.metadata.version != "1.0.0" {
+    if backup.metadata.version != "1.1.0" {
         return Err(format!(
-            "Unsupported backup version: {}. Expected 1.0.0",
+            "Unsupported backup version: {}. Expected 1.1.0",
             backup.metadata.version
         ));
     }
@@ -209,7 +209,7 @@ pub fn validate_backup_file(backup_json: String) -> Result<bool, String> {
         .map_err(|e| format!("Invalid backup file format: {}", e))?;
     
     // Validate version
-    if backup.metadata.version != "1.0.0" {
+    if backup.metadata.version != "1.1.0" {
         return Ok(false);
     }
     
