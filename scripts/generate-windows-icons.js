@@ -26,10 +26,12 @@ try {
 
   // Create icon.ico from a subset of sizes
   const icoPath = path.join(outDir, 'icon.ico');
+  // Use common icon sizes for ICO containers (16,32,48,256)
   const icoPngs = [
+    path.join(outDir, 'icon-16.png'),
+    path.join(outDir, 'icon-32.png'),
     path.join(outDir, 'icon-48.png'),
-    path.join(outDir, 'icon-256.png'),
-    path.join(outDir, 'icon-512.png')
+    path.join(outDir, 'icon-256.png')
   ].filter(p => fs.existsSync(p));
 
   if (icoPngs.length > 0) {
