@@ -34,6 +34,7 @@
     "release": "node scripts/release.js",
     "release:windows": "powershell -ExecutionPolicy Bypass -File scripts/build.ps1",
     "release:unix": "bash scripts/build.sh",
+  "generate:icons:win": "node scripts/generate-windows-icons.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
@@ -67,6 +68,9 @@
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.46.1",
     "vite": "^6.0.1"
+  ,
+    "sharp": "^0.33.0",
+    "png-to-ico": "^3.0.1"
   },
   "engines": {
     "node": ">=18.0.0",

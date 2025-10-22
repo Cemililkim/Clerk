@@ -304,27 +304,27 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                   {isCliGuideExpanded && (
                     <div className="settings-modal-cli-guide-content">
                       <div className="settings-modal-cli-guide-section">
-                        <h4>🚀 Basic Commands</h4>
+                        <h4>Basic Commands</h4>
                         <div className="settings-modal-cli-command">
                           <code>clerk unlock</code>
                           <span>Unlock your vault (creates a session)</span>
                         </div>
                         <div className="settings-modal-cli-command">
-                          <code>clerk get API_KEY -p my-app -e prod</code>
-                          <span>Get a variable value</span>
+                          <code>clerk var get API_KEY -p my-app -e prod</code>
+                          <span>Get a variable value (use the new <code>var</code> subgroup)</span>
                         </div>
                         <div className="settings-modal-cli-command">
-                          <code>clerk set DB_URL postgres://... -p my-app -e dev</code>
+                          <code>clerk var set DB_URL postgres://... -p my-app -e dev</code>
                           <span>Set a variable</span>
                         </div>
                         <div className="settings-modal-cli-command">
-                          <code>clerk ls -p my-app -e prod --show-values</code>
-                          <span>List all variables (alias: list)</span>
+                          <code>clerk var list -p my-app -e prod --show-values</code>
+                          <span>List variables in an environment</span>
                         </div>
                       </div>
 
                       <div className="settings-modal-cli-guide-section">
-                        <h4>📦 Project & Environment</h4>
+                        <h4>Project & Environment</h4>
                         <div className="settings-modal-cli-command">
                           <code>clerk pc my-app -d "My application"</code>
                           <span>Create project (alias: project-create)</span>
@@ -344,23 +344,27 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                       </div>
 
                       <div className="settings-modal-cli-guide-section">
-                        <h4>🔄 Bulk Operations</h4>
+                        <h4>Bulk & Import/Export</h4>
                         <div className="settings-modal-cli-command">
-                          <code>clerk imp .env.local -p my-app -e dev --overwrite</code>
-                          <span>Import from .env file (alias: import)</span>
+                          <code>clerk var import .env.local -p my-app -e dev --overwrite</code>
+                          <span>Import from .env file into an environment</span>
                         </div>
                         <div className="settings-modal-cli-command">
-                          <code>clerk export -p my-app -e prod -o .env</code>
-                          <span>Export to .env file</span>
+                          <code>clerk var export -p my-app -e prod -o .env</code>
+                          <span>Export environment to .env file</span>
                         </div>
                         <div className="settings-modal-cli-command">
-                          <code>clerk cp API_KEY --from-project app1 --from-env dev --to-project app2 --to-env prod</code>
+                          <code>clerk var bulk-set .env.batch -p my-app -e staging --overwrite</code>
+                          <span>Bulk set variables from a file</span>
+                        </div>
+                        <div className="settings-modal-cli-command">
+                          <code>clerk var copy API_KEY --from-project app1 --from-env dev --to-project app2 --to-env prod</code>
                           <span>Copy variable between environments</span>
                         </div>
                       </div>
 
                       <div className="settings-modal-cli-guide-section">
-                        <h4>🔐 Session Management</h4>
+                        <h4>Session Management</h4>
                         <div className="settings-modal-cli-command">
                           <code>clerk status</code>
                           <span>Check if vault is unlocked</span>
@@ -370,20 +374,20 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                           <span>Lock vault and clear session</span>
                         </div>
                         <div className="settings-modal-cli-command">
-                          <code>clerk -S get API_KEY -p app -e prod</code>
+                          <code>clerk -S var get API_KEY -p app -e prod</code>
                           <span>Skip session (always prompt for password)</span>
                         </div>
                       </div>
 
                       <div className="settings-modal-cli-guide-section">
-                        <h4>⚡ Advanced Usage</h4>
+                        <h4>Advanced Usage</h4>
                         <div className="settings-modal-cli-command">
                           <code>clerk run -p my-app -e prod -- npm start</code>
                           <span>Run command with injected env variables</span>
                         </div>
                         <div className="settings-modal-cli-command">
-                          <code>clerk d API_KEY -p my-app -e dev --force</code>
-                          <span>Delete variable (alias: delete)</span>
+                          <code>clerk var delete API_KEY -p my-app -e dev --force</code>
+                          <span>Delete variable (use <code>var</code> subgroup or legacy alias)</span>
                         </div>
                         <div className="settings-modal-cli-command">
                           <code>clerk --help</code>
@@ -392,13 +396,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                       </div>
 
                       <div className="settings-modal-cli-guide-tips">
-                        <strong>💡 Pro Tips:</strong>
+                        <strong>Pro Tips:</strong>
                         <ul>
-                          <li>Session persists across commands in the same terminal</li>
-                          <li>Use short aliases for faster typing: <code>g</code>, <code>s</code>, <code>ls</code>, <code>d</code>, <code>cp</code></li>
-                          <li>Use <code>--force</code> flag to skip confirmation prompts</li>
-                          <li>Comments in .env files are ignored during import</li>
-                          <li>Each terminal session has isolated password cache</li>
+                          <li>Variable commands are grouped under <code>clerk var &lt;cmd&gt;</code> for clarity.</li>
+                          <li>Top-level aliases still exist for backward compatibility, but prefer <code>clerk var ...</code>.</li>
+                          <li>Use short aliases for faster typing where available.</li>
+                          <li>Each terminal session has isolated password cache.</li>
+                          <li>Use <code>--force</code> to skip confirmations during destructive actions.</li>
                         </ul>
                       </div>
                     </div>

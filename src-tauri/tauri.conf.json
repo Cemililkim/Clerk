@@ -39,18 +39,22 @@
     "active": true,
     "targets": ["nsis"],
     "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/128x128@2x.png",
-      "icons/icon.icns",
-      "icons/icon.ico"
+      "../icons/win/icon-16.png",
+      "../icons/win/icon-32.png",
+      "../icons/win/icon-48.png",
+      "../icons/win/icon-256.png",
+      "../icons/win/icon-512.png",
+      "../icons/icon.icns",
+      "../icons/win/icon.ico"
     ],
     "publisher": "Clerk Project",
     "homepage": "https://github.com/Cemililkim/Clerk",
     "shortDescription": "Secure environment variable manager with encryption",
     "longDescription": "Clerk is a free, open-source desktop application for securely managing environment variables across multiple projects and environments. Features AES-256-GCM encryption, audit logging, CLI integration, and cross-platform support.",
     "category": "DeveloperTool",
-    "resources": [],
+    "resources": [
+      "../icons/clerkIcon.svg"
+    ],
     "copyright": "Copyright © 2025 Clerk Project",
     "licenseFile": "../LICENSE",
     "windows": {
@@ -67,10 +71,10 @@
         "dialogImagePath": null,
         "bannerPath": null
       },
-      "nsis": {
-        "headerImage": null,
-        "sidebarImage": null,
-        "installerIcon": "icons/icon.ico",
+  "nsis": {
+  "headerImage": null,
+  "sidebarImage": null,
+  "installerIcon": "../icons/win/icon.ico",
         "installMode": "currentUser",
         "languages": ["English"],
         "displayLanguageSelector": false,

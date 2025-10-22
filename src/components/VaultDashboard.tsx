@@ -11,9 +11,10 @@ import { useInactivityTimer } from '../hooks/useInactivityTimer';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import { useDebounce } from '../hooks/useDebounce';
 import { 
-  ShieldCheck, RefreshCw, ScrollText, Settings, Lock, Plus, Search, 
+  RefreshCw, ScrollText, Settings, Lock, Plus, Search, 
   Package, Rocket, FilePenLine, Trash2, X, AlertTriangle, Inbox 
 } from 'lucide-react';
+import AppIcon from './AppIcon';
 import { ProjectListSkeleton } from './Skeleton';
 import './VaultDashboard.css';
 
@@ -240,8 +241,8 @@ export const VaultDashboard: React.FC<VaultDashboardProps> = ({ onLock }) => {
   return (
     <div className="vault-dashboard">
       <header className="vault-dashboard-header">
-        <div className="vault-dashboard-header-left">
-          <ShieldCheck size={32} className="vault-dashboard-logo-icon" />
+          <div className="vault-dashboard-header-left">
+          <AppIcon size={40} />
           <h1>Clerk</h1>
         </div>
         <div className="vault-dashboard-header-right">

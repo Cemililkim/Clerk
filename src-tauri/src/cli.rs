@@ -329,6 +329,130 @@ enum Commands {
         #[arg(short = 'V', long)]
         vault_dir: Option<PathBuf>,
     },
+    /// Variable operations (use `clerk var ...`)
+    #[command(subcommand)]
+    Var(VarCommands),
+}
+
+#[derive(Subcommand)]
+enum VarCommands {
+    /// Get a variable value
+    #[command(visible_alias = "g")]
+    Get {
+        /// Variable key name
+        key: String,
+        /// Project name
+        #[arg(short, long)]
+        project: String,
+        /// Environment name
+        #[arg(short, long)]
+        env: String,
+        /// Custom vault directory (optional)
+        #[arg(short = 'V', long)]
+        vault_dir: Option<PathBuf>,
+    },
+    /// Set a variable value
+    #[command(visible_alias = "s")]
+    Set {
+        key: String,
+        value: String,
+        #[arg(short, long)]
+        project: String,
+        #[arg(short, long)]
+        env: String,
+        #[arg(short, long)]
+        description: Option<String>,
+        #[arg(short = 'V', long)]
+        vault_dir: Option<PathBuf>,
+    },
+    /// List variables
+    #[command(visible_alias = "ls")]
+    List {
+        #[arg(short, long)]
+        project: Option<String>,
+        #[arg(short, long)]
+        env: Option<String>,
+        #[arg(short, long)]
+        show_values: bool,
+        #[arg(short = 'V', long)]
+        vault_dir: Option<PathBuf>,
+    },
+    /// Delete a variable
+    #[command(visible_alias = "d")]
+    Delete {
+        key: String,
+        #[arg(short, long)]
+        project: String,
+        #[arg(short, long)]
+        env: String,
+        #[arg(short, long)]
+        force: bool,
+        #[arg(short = 'V', long)]
+        vault_dir: Option<PathBuf>,
+    },
+    /// Copy a variable between environments
+    #[command(visible_alias = "cp")]
+    Copy {
+        key: String,
+        #[arg(long)]
+        from_project: String,
+        #[arg(long)]
+        from_env: String,
+        #[arg(long)]
+        to_project: String,
+        #[arg(long)]
+        to_env: String,
+        #[arg(long)]
+        overwrite: bool,
+        #[arg(short = 'V', long)]
+        vault_dir: Option<PathBuf>,
+    },
+    /// Import variables from a .env file (alias for top-level import)
+    #[command(visible_alias = "imp")]
+    Import {
+        file: PathBuf,
+        #[arg(short, long)]
+        project: String,
+        #[arg(short, long)]
+        env: String,
+        #[arg(long)]
+        overwrite: bool,
+        #[arg(short = 'V', long)]
+        vault_dir: Option<PathBuf>,
+    },
+    /// Export variables to .env format
+    #[command(visible_alias = "exp")]
+    Export {
+        #[arg(short, long)]
+        project: String,
+        #[arg(short, long)]
+        env: String,
+        #[arg(short, long)]
+        output: Option<PathBuf>,
+        #[arg(short = 'V', long)]
+        vault_dir: Option<PathBuf>,
+    },
+    /// List only variable keys (machine-friendly)
+    Keys {
+        #[arg(short, long)]
+        project: String,
+        #[arg(short, long)]
+        env: String,
+        #[arg(short = 'V', long)]
+        vault_dir: Option<PathBuf>,
+    },
+    /// Bulk set variables from a file (delegates to import)
+    BulkSet {
+        file: PathBuf,
+        #[arg(short, long)]
+        project: String,
+        #[arg(short, long)]
+        env: String,
+        #[arg(long)]
+        overwrite: bool,
+        #[arg(short = 'V', long)]
+        vault_dir: Option<PathBuf>,
+    },
 }
 
 impl Commands {
@@ -340,6 +464,19 @@ impl Commands {
             Commands::List { vault_dir, .. } => vault_dir.clone(),
             Commands::Export { vault_dir, .. } => vault_dir.clone(),
             Commands::Init { vault_dir, .. } => vault_dir.clone(),
+            Commands::Var(cmd) => {
+                match cmd {
+                    VarCommands::Get { vault_dir, .. } => vault_dir.clone(),
+                    VarCommands::Set { vault_dir, .. } => vault_dir.clone(),
+                    VarCommands::List { vault_dir, .. } => vault_dir.clone(),
+                    VarCommands::Delete { vault_dir, .. } => vault_dir.clone(),
+                    VarCommands::Copy { vault_dir, .. } => vault_dir.clone(),
+                    VarCommands::Import { vault_dir, .. } => vault_dir.clone(),
+                    VarCommands::Export { vault_dir, .. } => vault_dir.clone(),
+                    VarCommands::Keys { vault_dir, .. } => vault_dir.clone(),
+                    VarCommands::BulkSet { vault_dir, .. } => vault_dir.clone(),
+                }
+            }
             Commands::Run { vault_dir, .. } => vault_dir.clone(),
             Commands::Lock => None,
             Commands::Status { vault_dir } => vault_dir.clone(),
@@ -474,6 +611,78 @@ fn main() {
                 process::exit(1);
             }
         }
+    Commands::Var(command) => {
+            // helper to choose per-command vault_dir or global one
+            let choose_vault = |cmd_vault: &Option<PathBuf>| -> Option<PathBuf> {
+                if let Some(v) = cmd_vault { Some(v.clone()) } else { vault_dir.clone() }
+            };
+
+            match command {
+                VarCommands::Get { key, project, env, vault_dir: cmd_vault, .. } => {
+                    let vd = choose_vault(cmd_vault);
+                    if let Err(e) = cmd_get(key, project, env, vd, use_session) {
+                        eprintln!("Error: {}", e);
+                        process::exit(1);
+                    }
+                }
+                VarCommands::Set { key, value, project, env, description, vault_dir: cmd_vault, .. } => {
+                    let vd = choose_vault(cmd_vault);
+                    if let Err(e) = cmd_set(key, value, project, env, description.as_deref(), vd, use_session) {
+                        eprintln!("Error: {}", e);
+                        process::exit(1);
+                    }
+                }
+                VarCommands::List { project, env, show_values, vault_dir: cmd_vault, .. } => {
+                    let vd = choose_vault(cmd_vault);
+                    if let Err(e) = cmd_list(project.as_deref(), env.as_deref(), *show_values, vd, use_session) {
+                        eprintln!("Error: {}", e);
+                        process::exit(1);
+                    }
+                }
+                VarCommands::Delete { key, project, env, force, vault_dir: cmd_vault, .. } => {
+                    let vd = choose_vault(cmd_vault);
+                    if let Err(e) = cmd_delete(key, project, env, *force, vd, use_session) {
+                        eprintln!("Error: {}", e);
+                        process::exit(1);
+                    }
+                }
+                VarCommands::Copy { key, from_project, from_env, to_project, to_env, overwrite, vault_dir: cmd_vault, .. } => {
+                    let vd = choose_vault(cmd_vault);
+                    if let Err(e) = cmd_copy(key, from_project, from_env, to_project, to_env, *overwrite, vd, use_session) {
+                        eprintln!("Error: {}", e);
+                        process::exit(1);
+                    }
+                }
+                VarCommands::Import { file, project, env, overwrite, vault_dir: cmd_vault, .. } => {
+                    let vd = choose_vault(cmd_vault);
+                    if let Err(e) = cmd_import(file, project, env, *overwrite, vd, use_session) {
+                        eprintln!("Error: {}", e);
+                        process::exit(1);
+                    }
+                }
+                VarCommands::Export { project, env, output, vault_dir: cmd_vault, .. } => {
+                    let vd = choose_vault(cmd_vault);
+                    if let Err(e) = cmd_export(project, env, output.clone(), vd, use_session) {
+                        eprintln!("Error: {}", e);
+                        process::exit(1);
+                    }
+                }
+                VarCommands::Keys { project, env, vault_dir: cmd_vault, .. } => {
+                    let vd = choose_vault(cmd_vault);
+                    if let Err(e) = cmd_var_keys(project, env, vd) {
+                        eprintln!("Error: {}", e);
+                        process::exit(1);
+                    }
+                }
+                VarCommands::BulkSet { file, project, env, overwrite, vault_dir: cmd_vault, .. } => {
+                    let vd = choose_vault(cmd_vault);
+                    if let Err(e) = cmd_var_bulk_set(file, project, env, *overwrite, vd, use_session) {
+                        eprintln!("Error: {}", e);
+                        process::exit(1);
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -499,36 +708,49 @@ fn get_session_file(vault_dir: &PathBuf) -> PathBuf {
     std::env::temp_dir().join(format!("{}-{:x}", SESSION_FILE_PREFIX, hash))
 }
 
-fn save_session(password: &str, vault_dir: &PathBuf) -> Result<(), String> {
-    let session_data = format!("{}|{}", password, vault_dir.display());
+use base64::{engine::general_purpose, Engine as _};
+
+fn save_session_key(key: &[u8], password_hash: &str, vault_dir: &PathBuf) -> Result<(), String> {
+    // Session file format: base64(key)|password_hash|vault_dir
+    let b64 = general_purpose::STANDARD.encode(key);
+    let session_data = format!("{}|{}|{}", b64, password_hash, vault_dir.display());
     let session_file = get_session_file(vault_dir);
-    
+
     fs::write(&session_file, session_data)
         .map_err(|e| format!("Failed to save session: {}", e))?;
-    
+
     Ok(())
 }
 
-fn load_session(vault_dir: &PathBuf) -> Option<String> {
+/// Try to load a cached derived key and stored password hash from session file.
+/// Returns Some((key_bytes, password_hash)) if present and valid.
+fn load_session_key(vault_dir: &PathBuf) -> Option<([u8; 32], String)> {
     let session_file = get_session_file(vault_dir);
-    
+
     if !session_file.exists() {
         return None;
     }
-    
+
     let content = fs::read_to_string(&session_file).ok()?;
-    let parts: Vec<&str> = content.splitn(2, '|').collect();
-    
-    if parts.len() != 2 {
+    let parts: Vec<&str> = content.splitn(3, '|').collect();
+
+    if parts.len() != 3 {
         return None;
     }
-    
+
     // Verify vault directory matches
-    if PathBuf::from(parts[1]) != *vault_dir {
+    if PathBuf::from(parts[2]) != *vault_dir {
         return None;
     }
-    
-    Some(parts[0].to_string())
+
+    let decoded = general_purpose::STANDARD.decode(parts[0].trim()).ok()?;
+    if decoded.len() != 32 {
+        return None;
+    }
+    let mut key = [0u8; 32];
+    key.copy_from_slice(&decoded);
+    let stored_hash = parts[1].to_string();
+    Some((key, stored_hash))
 }
 
 fn delete_session(vault_dir: &PathBuf) {
@@ -553,24 +775,29 @@ fn unlock_vault(vault_dir: Option<PathBuf>, use_session: bool) -> Result<(Databa
     let metadata: vault::VaultMetadata = serde_json::from_str(&metadata_content)
         .map_err(|e| format!("Failed to parse vault metadata: {}", e))?;
     
-    // Try to load password from session if enabled
-    let password = if use_session {
-        if let Some(cached_password) = load_session(&vault_path) {
-            println!("🔓 Using cached session...");
-            cached_password
-        } else {
-            println!("🔐 Enter master password:");
-            let pwd = rpassword::read_password()
-                .map_err(|e| format!("Failed to read password: {}", e))?;
-            pwd
+    // If session caching is enabled, try to use the cached derived key and stored password hash
+    if use_session {
+        if let Some((cached_key, stored_hash)) = load_session_key(&vault_path) {
+            // If the stored password hash matches the vault metadata, we can reuse the key
+            if stored_hash == metadata.password_hash {
+                // Open database and return cached key without noisy prints
+                let db_path = vault_path.join("vault.db");
+                let db = Database::new(&db_path)
+                    .map_err(|e| format!("Failed to open database: {}", e))?;
+                return Ok((db, cached_key));
+            } else {
+                // Stored hash mismatch (possibly password changed); remove session
+                delete_session(&vault_path);
+            }
         }
-    } else {
-        println!("🔐 Enter master password:");
-        rpassword::read_password()
-            .map_err(|e| format!("Failed to read password: {}", e))?
-    };
-    
-    // Verify password
+    }
+
+    // Prompt for password and verify
+    println!("Enter master password:");
+    let password = rpassword::read_password()
+        .map_err(|e| format!("Failed to read password: {}", e))?;
+
+    // Verify password against stored hash
     if !verify_password(&password, &metadata.password_hash)
         .map_err(|e| format!("Password verification failed: {}", e))? {
         // Delete invalid session if exists
@@ -579,33 +806,33 @@ fn unlock_vault(vault_dir: Option<PathBuf>, use_session: bool) -> Result<(Databa
         }
         return Err("Invalid password".to_string());
     }
-    
-    // Save session if enabled and not already cached
-    if use_session && load_session(&vault_path).is_none() {
-        save_session(&password, &vault_path)?;
-        println!("💾 Session saved for this terminal");
-    }
-    
+
     // Derive encryption key
     let salt: [u8; 16] = metadata.salt.as_slice()
         .try_into()
         .map_err(|_| "Invalid salt length")?;
-    
+
     let key = crypto::key_derivation::derive_key(&password, &salt)
         .map_err(|e| format!("Key derivation failed: {}", e))?;
+
+    // Save session if enabled and not already cached
+    if use_session && load_session_key(&vault_path).is_none() {
+        save_session_key(&key, &metadata.password_hash, &vault_path)?;
+        println!("Session saved for this terminal");
+    }
     
     // Open database
     let db_path = vault_path.join("vault.db");
     let db = Database::new(&db_path)
         .map_err(|e| format!("Failed to open database: {}", e))?;
     
-    println!("✅ Vault unlocked successfully!");
+    // Do not print unlock confirmation here to avoid noisy per-command messages.
     Ok((db, key))
 }
 
 fn cmd_unlock(vault_dir: Option<PathBuf>, use_session: bool) -> Result<(), String> {
     unlock_vault(vault_dir, use_session)?;
-    println!("✅ Vault is ready. You can now run other commands.");
+    println!("Vault is ready. You can now run other commands.");
     Ok(())
 }
 
@@ -690,7 +917,7 @@ fn cmd_set(
             &encryption_key,
         ).map_err(|e| format!("Failed to update variable: {}", e))?;
         
-        println!("✅ Updated variable '{}'", key);
+    println!("Updated variable '{}'", key);
     } else {
         // Create new variable
         operations::variables::create_variable_encrypted(
@@ -702,7 +929,7 @@ fn cmd_set(
             &encryption_key,
         ).map_err(|e| format!("Failed to create variable: {}", e))?;
         
-        println!("✅ Created variable '{}'", key);
+    println!("Created variable '{}'", key);
     }
     
     Ok(())
@@ -727,17 +954,17 @@ fn cmd_list(
         projects.iter().collect()
     };
     
-    if filtered_projects.is_empty() {
+        if filtered_projects.is_empty() {
         if let Some(filter) = project_filter {
-            println!("❌ No project found matching '{}'", filter);
+            println!("No project found matching '{}'", filter);
         } else {
-            println!("📭 No projects found. Create one using the GUI or 'clerk init'");
+            println!("No projects found. Create one using the GUI or 'clerk init'");
         }
         return Ok(());
     }
     
     for project in filtered_projects {
-        println!("\n📦 Project: {}", project.name);
+    println!("\nProject: {}", project.name);
         if let Some(desc) = &project.description {
             println!("   Description: {}", desc);
         }
@@ -755,7 +982,7 @@ fn cmd_list(
         };
         
         for env in filtered_envs {
-            println!("   🌍 Environment: {}", env.name);
+            println!("   Environment: {}", env.name);
             
             // Get variables
             let variables = operations::variables::get_variables_by_environment_decrypted(
@@ -833,12 +1060,61 @@ fn cmd_export(
     if let Some(path) = output {
         std::fs::write(&path, content)
             .map_err(|e| format!("Failed to write file: {}", e))?;
-        println!("✅ Exported to {}", path.display());
+        println!("Exported to {}", path.display());
     } else {
         print!("{}", content);
     }
     
     Ok(())
+}
+
+/// Print only variable keys for machine-friendly output
+fn cmd_var_keys(
+    project_name: &str,
+    env_name: &str,
+    vault_dir: Option<PathBuf>,
+) -> Result<(), String> {
+    let (db, encryption_key) = unlock_vault(vault_dir, true)?;
+
+    // Find project
+    let projects = operations::projects::get_all_projects(db.connection())
+        .map_err(|e| format!("Failed to get projects: {}", e))?;
+
+    let project = projects.iter()
+        .find(|p| p.name == project_name)
+        .ok_or_else(|| format!("Project '{}' not found", project_name))?;
+
+    // Find environment
+    let environments = operations::environments::get_environments_by_project(db.connection(), project.id.unwrap())
+        .map_err(|e| format!("Failed to get environments: {}", e))?;
+
+    let environment = environments.iter()
+        .find(|e| e.name == env_name)
+        .ok_or_else(|| format!("Environment '{}' not found in project '{}'", env_name, project_name))?;
+
+    let variables = operations::variables::get_variables_by_environment_decrypted(
+        db.connection(),
+        environment.id.unwrap(),
+        &encryption_key,
+    ).map_err(|e| format!("Failed to get variables: {}", e))?;
+
+    for v in variables {
+        println!("{}", v.key);
+    }
+
+    Ok(())
+}
+
+/// Bulk set simply delegates to import to reuse the parsing/encryption logic
+fn cmd_var_bulk_set(
+    file: &PathBuf,
+    project_name: &str,
+    env_name: &str,
+    overwrite: bool,
+    vault_dir: Option<PathBuf>,
+    use_session: bool,
+) -> Result<(), String> {
+    cmd_import(file, project_name, env_name, overwrite, vault_dir, use_session)
 }
 
 fn cmd_init(project_name: &str, description: Option<&str>, vault_dir: Option<PathBuf>, use_session: bool) -> Result<(), String> {
@@ -864,8 +1140,8 @@ fn cmd_init(project_name: &str, description: Option<&str>, vault_dir: Option<Pat
     operations::projects::create_project(db.connection(), &project)
         .map_err(|e| format!("Failed to create project: {}", e))?;
     
-    println!("✅ Created project '{}'", project_name);
-    println!("💡 Next steps:");
+    println!("Created project '{}'", project_name);
+    println!("Next steps:");
     println!("   1. Create an environment (using GUI or add to this CLI)");
     println!("   2. Add variables with: clerk set KEY VALUE -p {} -e ENV_NAME", project_name);
     
@@ -905,7 +1181,7 @@ fn cmd_run(project_name: &str, env_name: &str, command: &[String], vault_dir: Op
     // Build environment variable map
     let mut env_vars: HashMap<String, String> = std::env::vars().collect();
     
-    println!("🔐 Injecting {} variables into process...", variables.len());
+    println!("Injecting {} variables into process...", variables.len());
     for var in variables {
         // Create AAD (Additional Authenticated Data) matching the format used during encryption
         let aad = format!("env:{};key:{}", var.environment_id, var.key);
@@ -927,8 +1203,8 @@ fn cmd_run(project_name: &str, env_name: &str, command: &[String], vault_dir: Op
     let program = &command[0];
     let args = &command[1..];
     
-    println!("🚀 Running: {} {}", program, args.join(" "));
-    println!("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    println!("Running: {} {}", program, args.join(" "));
+    println!("--------------------------------------------------");
     
     // Run command with injected environment variables
     let mut child = Command::new(program)
@@ -941,10 +1217,10 @@ fn cmd_run(project_name: &str, env_name: &str, command: &[String], vault_dir: Op
     let status = child.wait()
         .map_err(|e| format!("Failed to wait for command: {}", e))?;
     
-    println!("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    println!("--------------------------------------------------");
     
     if status.success() {
-        println!("✅ Command completed successfully");
+        println!("Command completed successfully");
         Ok(())
     } else {
         let code = status.code().unwrap_or(-1);
@@ -955,7 +1231,7 @@ fn cmd_run(project_name: &str, env_name: &str, command: &[String], vault_dir: Op
 fn cmd_lock(vault_dir: Option<PathBuf>) -> Result<(), String> {
     let vault_path = get_vault_dir(vault_dir)?;
     delete_session(&vault_path);
-    println!("🔒 Session cleared. You'll need to enter your password for the next command.");
+    println!("Session cleared. You'll need to enter your password for the next command.");
     Ok(())
 }
 
@@ -964,25 +1240,25 @@ fn cmd_status(vault_dir: Option<PathBuf>) -> Result<(), String> {
     let session_file = get_session_file(&vault_path);
     
     if !session_file.exists() {
-        println!("🔒 No active session");
+    println!("No active session");
         return Ok(());
     }
     
     let content = fs::read_to_string(&session_file)
         .map_err(|e| format!("Failed to read session: {}", e))?;
-    
-    let parts: Vec<&str> = content.splitn(2, '|').collect();
-    if parts.len() != 2 {
-        println!("🔒 Invalid session data");
+
+    let parts: Vec<&str> = content.splitn(3, '|').collect();
+    if parts.len() != 3 {
+        println!("Invalid session data");
         return Ok(());
     }
-    
-    let session_vault = PathBuf::from(parts[1]);
-    if session_vault == vault_path {
-        println!("🔓 Active session for vault: {}", vault_path.display());
+
+    let session_vault = PathBuf::from(parts[2]);
+        if session_vault == vault_path {
+        println!("Active session for vault: {}", vault_path.display());
         println!("   Session file: {}", session_file.display());
     } else {
-        println!("🔒 Session vault mismatch");
+        println!("Session vault mismatch");
         println!("   Current vault: {}", vault_path.display());
         println!("   Session vault: {}", session_vault.display());
     }
@@ -1008,7 +1284,7 @@ fn cmd_project_create(name: &str, description: Option<&str>, vault_dir: Option<P
     operations::projects::create_project(db.connection(), &project)
         .map_err(|e| format!("Failed to create project: {}", e))?;
     
-    println!("✅ Project '{}' created successfully!", name);
+    println!("Project '{}' created successfully!", name);
     Ok(())
 }
 
@@ -1023,8 +1299,8 @@ fn cmd_project_list(vault_dir: Option<PathBuf>, use_session: bool) -> Result<(),
         return Ok(());
     }
     
-    println!("📦 Projects ({})", projects.len());
-    println!("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    println!("Projects ({})", projects.len());
+    println!("--------------------------------------------------");
     
     for project in projects {
         let project_id = project.id.ok_or("Project ID is missing")?;
@@ -1032,7 +1308,7 @@ fn cmd_project_list(vault_dir: Option<PathBuf>, use_session: bool) -> Result<(),
             .map(|envs| envs.len())
             .unwrap_or(0);
         
-        println!("  • {} (ID: {})", project.name, project_id);
+    println!("  - {} (ID: {})", project.name, project_id);
         if let Some(desc) = &project.description {
             if !desc.is_empty() {
                 println!("    Description: {}", desc);
@@ -1062,8 +1338,8 @@ fn cmd_project_delete(name: &str, force: bool, vault_dir: Option<PathBuf>, use_s
         .map_err(|e| format!("Failed to get environments: {}", e))?;
     
     if !environments.is_empty() && !force {
-        println!("⚠️  Project '{}' has {} environment(s)", name, environments.len());
-        println!("   Use --force to delete anyway, or delete environments first:");
+    println!("Warning: Project '{}' has {} environment(s)", name, environments.len());
+    println!("   Use --force to delete anyway, or delete environments first:");
         for env in &environments {
             println!("     - {}", env.name);
         }
@@ -1074,7 +1350,7 @@ fn cmd_project_delete(name: &str, force: bool, vault_dir: Option<PathBuf>, use_s
     operations::projects::delete_project(db.connection(), project_id)
         .map_err(|e| format!("Failed to delete project: {}", e))?;
     
-    println!("✅ Project '{}' deleted successfully!", name);
+    println!("Project '{}' deleted successfully!", name);
     Ok(())
 }
 
@@ -1106,7 +1382,7 @@ fn cmd_env_create(name: &str, project_name: &str, description: Option<&str>, vau
     operations::environments::create_environment(db.connection(), &environment)
         .map_err(|e| format!("Failed to create environment: {}", e))?;
     
-    println!("✅ Environment '{}' created in project '{}'!", name, project_name);
+    println!("Environment '{}' created in project '{}'!", name, project_name);
     Ok(())
 }
 
@@ -1132,8 +1408,8 @@ fn cmd_env_list(project_name: &str, vault_dir: Option<PathBuf>, use_session: boo
         return Ok(());
     }
     
-    println!("🌍 Environments in '{}' ({})", project_name, environments.len());
-    println!("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    println!("Environments in '{}' ({})", project_name, environments.len());
+    println!("--------------------------------------------------");
     
     for env in environments {
         let env_id = env.id.ok_or("Environment ID is missing")?;
@@ -1141,7 +1417,7 @@ fn cmd_env_list(project_name: &str, vault_dir: Option<PathBuf>, use_session: boo
             .map(|vars| vars.len())
             .unwrap_or(0);
         
-        println!("  • {} (ID: {})", env.name, env_id);
+    println!("  - {} (ID: {})", env.name, env_id);
         if let Some(desc) = &env.description {
             if !desc.is_empty() {
                 println!("    Description: {}", desc);
@@ -1181,8 +1457,8 @@ fn cmd_env_delete(name: &str, project_name: &str, force: bool, vault_dir: Option
         .map_err(|e| format!("Failed to get variables: {}", e))?;
     
     if !variables.is_empty() && !force {
-        println!("⚠️  Environment '{}' has {} variable(s)", name, variables.len());
-        println!("   Use --force to delete anyway, or delete variables first:");
+    println!("Warning: Environment '{}' has {} variable(s)", name, variables.len());
+    println!("   Use --force to delete anyway, or delete variables first:");
         for var in variables.iter().take(5) {
             println!("     - {}", var.key);
         }
@@ -1196,7 +1472,7 @@ fn cmd_env_delete(name: &str, project_name: &str, force: bool, vault_dir: Option
     operations::environments::delete_environment(db.connection(), environment_id)
         .map_err(|e| format!("Failed to delete environment: {}", e))?;
     
-    println!("✅ Environment '{}' deleted from project '{}'!", name, project_name);
+    println!("Environment '{}' deleted from project '{}'!", name, project_name);
     Ok(())
 }
 
@@ -1237,7 +1513,7 @@ fn cmd_delete(key: &str, project_name: &str, env_name: &str, force: bool, vault_
     
     // Confirm deletion if not forced
     if !force {
-        println!("⚠️  Are you sure you want to delete '{}'? (use --force to skip this prompt)", key);
+    println!("Are you sure you want to delete '{}'? (use --force to skip this prompt)", key);
         println!("   Project: {}", project_name);
         println!("   Environment: {}", env_name);
         
@@ -1249,7 +1525,7 @@ fn cmd_delete(key: &str, project_name: &str, env_name: &str, force: bool, vault_
     operations::variables::delete_variable(db.connection(), variable_id)
         .map_err(|e| format!("Failed to delete variable: {}", e))?;
     
-    println!("✅ Variable '{}' deleted from {}/{}", key, project_name, env_name);
+    println!("Variable '{}' deleted from {}/{}", key, project_name, env_name);
     Ok(())
 }
 
@@ -1346,7 +1622,7 @@ fn cmd_copy(
         )
         .map_err(|e| format!("Failed to update variable: {}", e))?;
         
-        println!("✅ Variable '{}' updated in {}/{}", key, to_project, to_env);
+    println!("Variable '{}' updated in {}/{}", key, to_project, to_env);
     } else {
         // Create new
         let new_var = Variable::new(
@@ -1362,7 +1638,7 @@ fn cmd_copy(
         )
         .map_err(|e| format!("Failed to create variable: {}", e))?;
         
-        println!("✅ Variable '{}' copied to {}/{}", key, to_project, to_env);
+    println!("Variable '{}' copied to {}/{}", key, to_project, to_env);
     }
     
     Ok(())
@@ -1475,7 +1751,7 @@ fn cmd_import(
         }
     }
     
-    println!("✅ Import completed:");
+    println!("Import completed:");
     println!("   Created: {}", imported_count);
     println!("   Updated: {}", updated_count);
     if skipped_count > 0 {

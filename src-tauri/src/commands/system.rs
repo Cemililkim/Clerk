@@ -1,5 +1,8 @@
 use std::path::PathBuf;
-use tauri::{AppHandle, Manager};
+use tauri::AppHandle;
+// Manager trait is only required when calling `AppHandle::path()` in production builds
+#[cfg(not(debug_assertions))]
+use tauri::Manager;
 
 #[cfg(target_os = "windows")]
 use winreg::enums::*;

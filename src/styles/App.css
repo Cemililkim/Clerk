@@ -38,6 +38,18 @@
   margin: 0;
 }
 
+/* App header icon styles */
+.vault-dashboard-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vault-dashboard-header-left h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
 @keyframes app-spin {
   from {
     transform: rotate(0deg);

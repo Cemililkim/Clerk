@@ -1,0 +1,15 @@
+.app-icon img {
+  display: block;
+}
+
+.app-icon {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.app-icon.theme-bg {
+  background: var(--primary);
+}
+
+.app-icon.theme-bg img {
+  filter: brightness(0) invert(1); /* ensure white icon contrasts */
+}
